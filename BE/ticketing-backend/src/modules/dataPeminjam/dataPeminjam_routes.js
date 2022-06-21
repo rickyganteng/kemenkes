@@ -1,0 +1,38 @@
+const express = require('express')
+const Route = express.Router()
+const movieController = require('./dataPeminjam_controller')
+const authMiddleware = require('../../middleware/auth')
+const uploadFile = require('../../middleware/uploads')
+
+Route.get('/name', movieController.getMovieName)
+Route.get('/', movieController.getAllMovie)
+Route.get(
+  '/:id',
+
+  movieController.getMovieById
+)
+
+Route.post(
+  '/',
+  authMiddleware.authentication,
+  authMiddleware.isAdmin,
+  uploadFile,
+  movieController.postMovie
+)
+
+Route.patch(
+  '/:id',
+  authMiddleware.authentication,
+  authMiddleware.isAdmin,
+  uploadFile,
+  movieController.updateMovie
+)
+
+Route.delete(
+  '/:id',
+  authMiddleware.authentication,
+  authMiddleware.isAdmin,
+  movieController.deletedRuanganById
+)
+
+module.exports = Route

@@ -1,0 +1,186 @@
+@import url("https://fonts.googleapis.com/css2?family=Mulish&display=swap");
+
+.bgCnt {
+  background-color: #e5e5e5;
+}
+
+.bgDiv {
+  background-color: white;
+}
+
+.movieBtn {
+  background-color: #5f2eea;
+  border-bottom-right-radius: 28px;
+  border-bottom-left-radius: 28px;
+}
+
+.textMovieBtn {
+  font-family: Mulish;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 30px;
+  color: white;
+  letter-spacing: 0.25px;
+}
+
+.changeMovieBtn {
+  border-radius: 19px;
+  font-family: "Mulish", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.75px;
+  color: #5f2eea;
+}
+
+.title {
+  font-family: "Mulish", sans-serif;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 30px;
+  letter-spacing: 0.25px;
+}
+
+.titleSmall {
+  font-family: "Mulish", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 34px;
+  letter-spacing: 0.75px;
+}
+
+.semi {
+  font-family: "Mulish", sans-serif;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.75px;
+  color: #6b6b6b;
+}
+
+.cardImg {
+  text-align: center;
+}
+
+.rowSeat {
+  flex-wrap: nowrap !important;
+}
+
+.colSeat {
+  padding: 8px 0px 0px 3px;
+  /* font-size: 10px; */
+}
+
+.seat {
+  width: 22px;
+  height: 22px;
+  border-radius: 25%;
+  font-family: "Mulish", sans-serif;
+  font-size: 10px;
+  color: #6b6b6b;
+  font-weight: 600;
+}
+
+.avaliable {
+  background-color: #d6d8e7;
+}
+
+.selected {
+  background-color: #5f2eea;
+}
+
+.sold {
+  background-color: #6e7191;
+}
+
+.screen {
+  width: 434px;
+  margin-left: 16px;
+  margin-bottom: 10px;
+  font-family: "Mulish", sans-serif;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.75px;
+  color: #6b6b6b;
+  font-weight: 700;
+}
+
+.cardScreen {
+  width: 480px;
+  margin: auto;
+  border: none;
+}
+
+@media (max-width: 991.98px) {
+  .down {
+    margin-top: -650px;
+  }
+  .down1 {
+    padding-top: 500px;
+    padding-bottom: 1px;
+    margin-bottom: 1px;
+    margin-top: 700px;
+    position: relative;
+  }
+  .btPrevious {
+    width: 100%;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .btPay {
+    width: 100%;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (min-width: 992px) {
+  .btPrevious {
+    width: 300px;
+    height: 50px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .btPay {
+    width: 300px;
+    height: 50px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.btPrevious {
+  border-color: #5f2eea;
+  border-radius: 20px;
+  color: #5f2eea;
+  font-family: "Mulish", sans-serif;
+  font-size: 16px;
+  line-height: 28px;
+  letter-spacing: 0.75px;
+  font-weight: bold;
+}
+
+.btPay {
+  background-color: #5f2eea;
+  border-radius: 20px;
+  color: white;
+  font-family: "Mulish", sans-serif;
+  font-size: 16px;
+  line-height: 28px;
+  letter-spacing: 0.75px;
+  font-weight: bold;
+}
+
+.btPay:hover {
+  background-color: #5f2eea;
+}
+
+.btPrevious:hover {
+  background-color: #5f2eea;
+}
+
+.modal {
+  font-family: "Mulish", sans-serif !important;
+  margin: auto;
+}
