@@ -49,7 +49,6 @@ module.exports = {
         'SELECT COUNT(*) AS total FROM waitinglist_ruangan WHERE booking_ruangan_nama LIKE ?',
         keywords,
         (error, result) => {
-          // console.log(result) isi array dalamnya objek
           !error ? resolve(result[0].total) : reject(new Error(error))
         }
       )
@@ -62,7 +61,6 @@ module.exports = {
         id,
         (error, result) => {
           !error ? resolve(result) : reject(new Error(error))
-          // console.log(result)
         }
       )
     })
@@ -128,13 +126,6 @@ module.exports = {
     })
   },
   getDataConditionLebihSatu: (ruangYangDigunakan, ruangTanggalBooking, ruangTanggalBookingAkhir) => {
-    const a = 1
-    console.log('hehe', a)
-    console.log('hehe', ruangYangDigunakan)
-    console.log('hehe', ruangTanggalBooking)
-    // console.log('hehe', ruangWaktuMulai)
-    // console.log('hehe', ruangWaktuAkhir)
-    console.log('hehe', ruangTanggalBookingAkhir)
     return new Promise((resolve, reject) => {
       connection.query('SELECT * FROM waitinglist_ruangan WHERE booking_ruangan_ruangan = ? AND booking_ruangan_tanggal = ? AND booking_ruangan_waktu_penggunaan_awal < ? AND booking_ruangan_waktu_penggunaan_akhir > ?', [ruangYangDigunakan, ruangTanggalBooking, ruangTanggalBookingAkhir], (error, result) => {
         !error ? resolve(result) : reject(new Error(error))

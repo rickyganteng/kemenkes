@@ -16,12 +16,6 @@ import hero3 from "../../../assets/img/g3.png";
 import styles from "./Homebook.module.css";
 import { connect } from "react-redux";
 import moment from "moment";
-import {
-  getAllMovie,
-  updateMovie,
-  postMovie,
-  deleteMovie,
-} from "../../../redux/action/movie";
 import { getPremiereAll, postRuangan, deleteRuangan } from "../../../redux/action/ruangan"
 import { getbookingRuanganAll, postbookingRuangan, getbookingRuanganAllTanpaFill, deleteBookingRuangan, updateDataBooking } from "../../../redux/action/bookingRuangan"
 import { getwaitinglistAllTanpaFill, deletewaitinglist, postwaitinglist, postWaitingListLebihSatu } from "../../../redux/action/waitingList"
@@ -245,8 +239,6 @@ class Home extends Component {
     this.props.getbookingRuanganAll(page2, limit2, sortBy2, search2);
   };
   getData3 = () => {
-    // const id = this.props.auth.data.id;
-    // console.log(this.state.form.idUserr);
     this.props.getBookingUser(this.state.form.idUserr);
   };
   getData4 = () => {
@@ -255,8 +247,6 @@ class Home extends Component {
     this.props.getwaitinglistAllTanpaFill();
   };
   getData5 = () => {
-    // const id = this.props.auth.data.id;
-    // console.log(this.state.form.idUserr);
     this.props.getWaitingListUser(this.state.form.idUserr);
   };
 
@@ -334,7 +324,6 @@ class Home extends Component {
   };
   postData = () => {
     const { form } = this.state;
-    console.log("pos", form);
 
     delete form.ruangBuktiSuratDinas;
     // if (!form.image) {
@@ -365,7 +354,6 @@ class Home extends Component {
       this.state.WaktuAkhirValid === "Invalid"
       // this.state.WaktuAwalValid === "Invalid"
     ) {
-      console.log("kosong");
       this.setState({
         // modalMsg: err.response.data.msg,
         showw: true,
@@ -418,7 +406,6 @@ class Home extends Component {
 
         })
         .catch((err) => {
-          console.log(err);
           this.setState({
             // modalMsg: err.response.data.msg,
             showw: true,
@@ -443,7 +430,6 @@ class Home extends Component {
   };
 
   postDataRuangan = () => {
-    console.log("pos");
     const { form } = this.state;
     delete form.ruangBuktiSuratDinas;
     // if (!form.image) {
@@ -459,7 +445,6 @@ class Home extends Component {
       form.TempatRuang == "" ||
       form.JumlahKursi == "" ||
       form.ruangBuktiSuratDinas == "") {
-      console.log("rabiso weee");
 
       this.setState({
         // modalMsg: err.response.data.msg,
@@ -492,7 +477,6 @@ class Home extends Component {
 
         })
         .catch((err) => {
-          console.log(err.response.data.msg);
           this.setState({
             // modalMsg: err.response.data.msg,
             showw: true,
@@ -593,7 +577,6 @@ class Home extends Component {
       });
   };
   setUpdate = (data) => {
-    console.log(data);
     this.setState({
       smShow: true,
       isUpdate: true,
@@ -646,23 +629,18 @@ class Home extends Component {
   };
 
   setSmShow = (event) => {
-    console.log(event);
-    console.log(event.namaruang_r);
     this.state.form.ruangYangDigunakan = event.namaruang_r;
     this.setState({
       smShow: true
     });
   };
   setPhotoShow = (event) => {
-    console.log(event);
-    console.log(event.namaruang_r);
     this.state.namaruang = event.namaruang_r;
     this.setState({
       photoShow: true
     });
   };
   modalClose = (event) => {
-    console.log('halo');
     this.setState({
       isUpdate: false,
       smShow: false,
@@ -670,7 +648,6 @@ class Home extends Component {
     });
   };
   modalPhotoClose = (event) => {
-    console.log('halo');
     this.setState({
       photoShow: false,
       photoShowPdf: false,
@@ -745,8 +722,6 @@ class Home extends Component {
 
 
   changeTextForm = (event) => {
-    console.log(event);
-    console.log(this.state.form.ruangWaktuMulai);
     const name = event.target.name;
     const value = event.target.value;
     if (name === "ruangNoHP") {
@@ -797,7 +772,6 @@ class Home extends Component {
     });
   };
   changeTextFormDirektorat = (event) => {
-    console.log(event);
     this.setState({
       form: {
         ...this.state.form,
@@ -806,7 +780,6 @@ class Home extends Component {
       },
       foo: this.state.namaUnitKerja[event.target.value]
     });
-    console.log(this.state.foo);
   };
   changeImage = (event) => {
     if (event.target.files[0]) {
@@ -833,10 +806,8 @@ class Home extends Component {
   };
 
   deleteImage = () => {
-    console.log('halo');
   };
   postBookingData = (data) => {
-    console.log(data);
     const ID = data.id
     axiosApiIntances
       .post("bookingruangan", data)
@@ -844,7 +815,6 @@ class Home extends Component {
         // this.setState({
         //   modalMsg: "Booking Succes !",
         //   showModal: true,
-        console.log(data);
 
         this.deleteDataBook(ID);
         // });
@@ -852,51 +822,20 @@ class Home extends Component {
           // this.setState({ showModal: false });
           this.props.history.push(`/`);
         }, 2000);
-        console.log("booking selesi");
       })
       .catch((err) => {
-        // this.setState({
-        //   modalMsg: "Booking Failed !",
-        //   showModal: true,
-        // });
-        console.log(err);
+        this.setState({
+          modalMsg: "Booking Failed !",
+          showModal: true,
+        });
       });
   };
   handleDibatalkan = (e) => {
-    console.log(e);
-
-    // this.setState({
-    //   actionPilihan: "Dibatalkan",
-    // })
-    // const laporan = {
-    //   laporanruangNamaPeminjam: e.row.booking_ruangan_nama,
-    //   laporanruangNIP: e.row.booking_ruangan_nip,
-    //   laporanruangNoHP: e.row.booking_ruangan_nohp,
-    //   laporanruangEmail: e.row.booking_ruangan_email,
-    //   laporanruangSatker: e.row.booking_ruangan_unitkerja,
-    //   laporanruangDirektorat: e.row.booking_ruangan_direktorat,
-    //   laporanruangTanggalBooking: e.row.booking_ruangan_tanggal,
-    //   laporanruangKeteranganAcara: e.row.booking_ruangan_keterangan_kegiatan_acara,
-    //   laporanruangPenanggungJawab: e.row.booking_ruangan_penaggung_jawab,
-    //   laporanruangYangDigunakan: e.row.booking_ruangan_ruangan,
-    //   laporanruangWaktuMulai: e.row.booking_ruangan_waktu_penggunaan_awal,
-    //   laporanruangWaktuAkhir: e.row.booking_ruangan_waktu_penggunaan_akhir,
-    //   laporanruangJumlahPeserta: e.row.booking_ruangan_jumlah_peserta,
-    //   laporanruangBuktiSuratDinas: e.row.booking_ruangan_surat_dinas,
-    //   image: e.row.booking_ruangan_surat_dinas,
-    //   idUserr: e.row.id_peminjam,
-    //   statusBooking: "Dibatalkan",
-    //   id: e.row.id
-
-    // }
-    // console.log(laporan);
-    // this.postBookingData(laporan);
   };
   changeText = (event) => {
     this.setState({ [event.target.name]: "%" + event.target.value + "%" });
   };
   handleSelesai = (e) => {
-    console.log(e.row);
 
     this.setState({
       actionPilihan: "Selesai",
@@ -921,14 +860,12 @@ class Home extends Component {
       id: e.row.id
       // statusBooking: "Selesai",
     }
-    console.log(laporan.booking_ruangan_surat_dinas);
-    console.log(laporan.ruangBuktiSuratDinas);
+
     this.postBookingData(laporan);
     // this.deleteDataBook(e.row.id);
 
   };
   handleSelectUnitKerja = (event) => {
-    console.log(event);
     this.setState({
       dropDownVal2: event,
       form: {
@@ -940,11 +877,8 @@ class Home extends Component {
   };
 
   handleImageTable = (moon) => {
-    console.log(moon.row.booking_ruangan_surat_dinas);
     let filePdf = moon.row.booking_ruangan_surat_dinas
-    console.log(filePdf);
     let pos = filePdf.indexOf(".pdf");
-    console.log(pos);
 
     if (pos > 1) {
       this.setState({
@@ -960,43 +894,16 @@ class Home extends Component {
 
     }
 
-    // for (let index = 0; index < filePdf.length; index++) {
-    //   // const element = array[index];
-    //   console.log(filePdf[index]);
-    //   if (filePdf[index] == "pdf") {
-    //     const jajal = filePdf[index];
-    //     this.state.cekpdf.push(jajal)
-    //   }
-    // }
-    // console.log(this.state.cekpdf);
-    // if (this.state.cekpdf > 0) {
-    //   this.setState({
-    //     photoSuratDinas: moon.row.booking_ruangan_surat_dinas,
-    //     photoShowPdf: true,
-    //     cekpdf: []
-    //   });
-    // } else {
-    //   this.setState({
-    //     photoSuratDinas: moon.row.booking_ruangan_surat_dinas,
-    //     photoShow: true,
-    //     // cekpdf: []
-
-    //   })
-    // }
 
   };
 
   setSmShowInput = (event) => {
-    console.log('halooooooo');
     this.setState({
       smShowInput: true
     });
   };
 
   render() {
-    console.log(this.props);
-    // console.log(this.state.namaUnitKerja["SUKARKES"]);
-    // console.log('weh', this.state.tanggal.toLocaleDateString('zh-Hans-CN'))
 
 
     const {
@@ -1056,30 +963,17 @@ class Home extends Component {
       WaktuAwalValid,
       msg
     } = this.state;
-    // console.log(this.state.form);
-    // console.log(this.state.form.idUserr);
-    console.log(photoShowPdf);
-    console.log(EmailValid);
-    console.log(ruangBuktiSuratDinas);
 
-    // console.log(this.state.tanggal.toLocaleTimeString('en-GB'));
     const hasil1 = this.state.tanggal;
-    // console.log(typeof (hasil1));
 
-
-    // console.log("DataMovUpcoming", this.state.dataMovUpcoming);
-    const { dataMovie, pagination } = this.props.movie;
     const { dataRuangan, paginationn } = this.props.ruangan;
     const { til, bismillah } = this.props.bookingruangan;
     const { waitingtanpafill } = this.props.waitingList;
     const { data } = this.props.auth;
     const { dataBookingById, dataWaitingById } = this.props.idUser;
-    // console.log('ruang direk', waitingtanpafill);
-    // const { dataRuangan } = this.props.ruangan;
-    // console.log(dataRuangan );
+
 
     const columns = [
-      // { field: 'id', headerName: 'ID', width: 70 },
 
       { field: 'booking_ruangan_nama', headerName: 'Nama', width: 130 },
       { field: 'booking_ruangan_nip', headerName: 'NIP', width: 130 },
@@ -1087,10 +981,6 @@ class Home extends Component {
       {
         field: 'booking_ruangan_tanggal', headerName: 'Tanggal Mulai', width: 130, renderCell: (params) => {
           var confdate = new Date(parseInt(params.row.booking_ruangan_tanggal)).toLocaleDateString("en-CA");
-          console.log(confdate);
-
-          // const date = confdate.toLocaleDateString("en-CA")
-          // console.log(confdate.toLocaleDateString("en-CA"))
           return (
             <div
               className={` mt-0  mx-auto`}
@@ -1388,7 +1278,6 @@ class Home extends Component {
                     >
                       {this.state.direktorat.length > 0 ? (
                         this.state.direktorat.map((item, index) => {
-                          // console.log(item);
                           return (
                             <div className="p-3 shadow" key={index}>
                               <Dropdown.Item
@@ -1454,7 +1343,6 @@ class Home extends Component {
                     >
                       {foo.length > 0 ? (
                         foo.map((item, index) => {
-                          console.log(item);
                           return (
                             <MenuItem value={item}
                             >{index + 1}. {item}</MenuItem>
@@ -1888,7 +1776,7 @@ class Home extends Component {
     );
   }
 }
-const mapDispatchToProps = { getAllMovie, getPremiereAll, postRuangan, deleteRuangan, getbookingRuanganAll, postbookingRuangan, postwaitinglist, postWaitingListLebihSatu, getbookingRuanganAllTanpaFill, getwaitinglistAllTanpaFill, postlaporanRuangan, deleteBookingRuangan, getBookingUser, getWaitingListUser, updateDataBooking, deletewaitinglist };
+const mapDispatchToProps = { getPremiereAll, postRuangan, deleteRuangan, getbookingRuanganAll, postbookingRuangan, postwaitinglist, postWaitingListLebihSatu, getbookingRuanganAllTanpaFill, getwaitinglistAllTanpaFill, postlaporanRuangan, deleteBookingRuangan, getBookingUser, getWaitingListUser, updateDataBooking, deletewaitinglist };
 
 const mapStateToProps = (state) => ({
   movie: state.movie,

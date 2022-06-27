@@ -2,27 +2,15 @@ import React, { Component } from "react";
 // import { Link } from "react-router-dom";
 import NavBar from "../../../components/NavBar/NavBar";
 import Footer from "../../../components/Footer/Footer";
-import Cards from "../../../components/Card/Cards";
-import Card from "../../../components/CardUpdate/CardUpdate";
 import axiosApiIntances from "../../../utils/axios";
 import ReactPaginate from "react-paginate";
-import { Button, Image, Container, Row, Col, Form, Dropdown, DropdownButton, Modal } from "react-bootstrap";
-import line from "../../../assets/img/line.png";
-import hero1 from "../../../assets/img/g1.png";
-import hero2 from "../../../assets/img/g2.png";
-import hero3 from "../../../assets/img/g3.png";
+import { Button, Image, Container, Row, Col, Form, Modal } from "react-bootstrap";
 import CheckIcon from '@mui/icons-material/Check';
 import EditIcon from '@mui/icons-material/Edit';
 import CancelIcon from '@mui/icons-material/Cancel';
 import styles from "./DataBooking.module.css";
 import { connect } from "react-redux";
 import moment from "moment";
-import {
-  getAllMovie,
-  updateMovie,
-  postMovie,
-  deleteMovie,
-} from "../../../redux/action/movie";
 import { deleteBookingRuangan, updateDataBooking, getbookingRuanganAllTanpaFill } from "../../../redux/action/bookingRuangan"
 import { getPremiereAll } from "../../../redux/action/ruangan"
 import { getlaporanRuanganAll, getlaporanRuanganAllTanpaFill } from "../../../redux/action/laporanRuangan"
@@ -234,95 +222,55 @@ class Home extends Component {
   }
 
   pushData = () => {
-    console.log("pushdata", this.props.auth.data);
     const arraykosong = [];
 
     Object.keys(this.props.bookingruangan.bismillah).forEach(key => {
-      // setListTokennSymbol(listTokenn[key].symbol)
-      // console.log('key', key);
-      // console.log('iki opo', listTokenn[key].symbol);
-      // < p > { listTokenn[key].symbol }</p>
-      // console.log(listTokennSymbol);
       const Tokenss = this.props.bookingruangan.bismillah[key];
       arraykosong.push(Tokenss);
 
     })
-    console.log(arraykosong);
-    // setListTokennSymbol(arraykosong)
-    // this.state.tanggal.toLocaleTimeString('en-GB')
 
     if (arraykosong.length > 0) {
       for (let index = 0; index < arraykosong.length; index++) {
-        console.log('-------------------', arraykosong[index]);
-        console.log(this.state.tanggal.toLocaleDateString("en-CA"));
-        console.log(arraykosong[index].booking_ruangan_waktu_penggunaan_akhir);
-        console.log(this.state.tanggal.toLocaleTimeString('en-GB'));
         var confdatee = new Date(parseInt(arraykosong[index].booking_ruangan_tanggal)).toLocaleDateString("en-CA");
-        console.log('bookigk', arraykosong[index].booking_ruangan_waktu_penggunaan_akhir);
-        console.log('bookigk', this.state.tanggal.toLocaleTimeString('en-GB'));
-        console.log('bookigk', confdatee);
-        console.log('bookigk', this.state.tanggal.toLocaleDateString("en-CA"));
-        console.log(confdatee < this.state.tanggal.toLocaleDateString("en-CA"));
-        console.log(arraykosong[index].booking_ruangan_waktu_penggunaan_akhir <= this.state.tanggal.toLocaleTimeString('en-GB'));
         // arraykosong[index].booking_ruangan_waktu_penggunaan_akhir <= this.state.tanggal.toLocaleTimeString('en-GB') && arraykosong[index].booking_ruangan_tanggal <= this.state.tanggal.toLocaleDateString("en-CA")
         if (confdatee <= this.state.tanggal.toLocaleDateString("en-CA")) {
           if (arraykosong[index].booking_ruangan_waktu_penggunaan_akhir <= this.state.tanggal.toLocaleTimeString('en-GB')) {
-            console.log(arraykosong);
             this.postcoba(arraykosong[index])
 
           }
-          console.log(arraykosong);
           this.postcoba(arraykosong[index])
         }
       }
     } else {
-      console.log("Data Booking Kosong");
     }
 
   }
 
   pushDataBasic = () => {
-    console.log("ljojoj", this.props.auth.data);
     const arraykosongId = [];
 
     Object.keys(this.props.idUser.dataBookingById).forEach(key => {
-      // setListTokennSymbol(listTokenn[key].symbol)
-      // console.log('key', key);
-      // console.log('iki opo', listTokenn[key].symbol);
-      // < p > { listTokenn[key].symbol }</p>
-      // console.log(listTokennSymbol);
       const Tokenss = this.props.idUser.dataBookingById[key];
       arraykosongId.push(Tokenss);
-      console.log(Tokenss);
     })
-    console.log(arraykosongId);
-    // setListTokennSymbol(arraykosong)
-    // this.state.tanggal.toLocaleTimeString('en-GB')
 
     if (arraykosongId.length > 0) {
       for (let index = 0; index < arraykosongId.length; index++) {
-        console.log('-------------------', arraykosongId[index]);
-        console.log(this.state.tanggal.toLocaleDateString("en-CA"));
-        console.log(arraykosongId[index].booking_ruangan_waktu_penggunaan_akhir);
-        console.log(this.state.tanggal.toLocaleTimeString('en-GB'));
+
         var confdatee = new Date(parseInt(arraykosongId[index].booking_ruangan_tanggal)).toLocaleDateString("en-CA");
-        console.log('bookigk', confdatee);
-        console.log('bookigk');
         // arraykosong[index].booking_ruangan_waktu_penggunaan_akhir <= this.state.tanggal.toLocaleTimeString('en-GB') && arraykosong[index].booking_ruangan_tanggal <= this.state.tanggal.toLocaleDateString("en-CA")
         if (arraykosongId[index].booking_ruangan_waktu_penggunaan_akhir <= this.state.tanggal.toLocaleTimeString('en-GB') && confdatee <= this.state.tanggal.toLocaleDateString("en-CA")) {
-          console.log('ye cobo ow', arraykosongId[index].booking_ruangan_waktu_penggunaan_akhir <= this.state.tanggal.toLocaleTimeString('en-GB') && confdatee <= this.state.tanggal.toLocaleDateString("en-CA"));
-          console.log(arraykosongId);
+
           this.postcoba(arraykosongId[index])
         }
       }
     } else {
-      console.log("Data Booking Kosong");
     }
 
   }
 
   postcoba = (e) => {
-    console.log("ini bisa ga ya", e);
     const laporan = {
       laporanruangNamaPeminjam: e.booking_ruangan_nama,
       laporanruangNIP: e.booking_ruangan_nip,
@@ -342,11 +290,9 @@ class Home extends Component {
       statusBooking: "Selesai",
       id: e.id
     }
-    console.log(laporan);
     axiosApiIntances
       .post("laporanruangan", laporan)
       .then((res) => {
-        console.log("delete gehhh", laporan.id);
         // this.setState({
         //   modalMsg: "Booking Succes !",
         //   showModal: true,
@@ -356,27 +302,21 @@ class Home extends Component {
           // this.setState({ showModal: false });
           this.props.history.push(`/databooking`);
         }, 2000);
-        console.log("booking selesi");
       })
       .catch((err) => {
         // this.setState({
         //   modalMsg: "Booking Failed !",
         //   showModal: true,
         // });
-        console.log(err);
       });
   }
 
   getData2 = () => {
-    // const id = this.props.auth.data.id;
-    // console.log(this.state.form.idUserr);
     const { page, limit, sortBy, search } = this.state;
-    console.log('lwlwlwlwl', this.state.form.idUserr);
     this.props.getBookingUser(this.state.form.idUserr, page, limit, sortBy, search);
   };
   getData3 = () => {
     const id = this.props.auth.data.id;
-    // console.log(id);
     this.props.getLaporanUser(id);
   };
   getData = () => {
@@ -431,24 +371,6 @@ class Home extends Component {
       this.getData3();
     });
   };
-  // setUpdate = (data) => {
-  //   // console.log(data);
-  //   this.setState({
-  //     isUpdate: true,
-  //     id: data.movie_id,
-  //     form: {
-  //       movieName: data.movie_name,
-  //       movieCategory: data.movie_category,
-  //       movieReleaseDate: moment(data.movie_release_date).format("YYYY-MM-DD"),
-  //       movieDuration: data.movie_duration,
-  //       movieDirectedBy: data.movie_directed_by,
-  //       movieCasts: data.movie_casts,
-  //       movieSynopsis: data.movie_synopsis,
-  //       movieImage: `http://localhost:3001/backend1/api/${data.movie_image}`,
-  //       image: null,
-  //     },
-  //   });
-  // };
   handleSelect = (event) => {
     this.setState({
       dropDownVal: event.split("-")[0],
@@ -457,13 +379,11 @@ class Home extends Component {
   };
 
   setSmShow = (event) => {
-    // console.log('halooooooo');
     this.setState({
       smShow: true
     });
   };
   modalClose = (event) => {
-    // console.log('halo');
     this.setState({
       smShow: false,
       photoShow: false
@@ -499,10 +419,6 @@ class Home extends Component {
   };
 
   handleImageTable = (moon) => {
-    console.log(moon.row.booking_ruangan_surat_dinas);
-    // console.log(event);
-    // console.log(event.namaruang_r);
-    // this.state.namaruang = event.namaruang_r;
     this.setState({
       photoSuratDinas: moon.row.booking_ruangan_surat_dinas,
       photoShow: true
@@ -518,7 +434,6 @@ class Home extends Component {
     });
   };
   postBookingData = (data) => {
-    console.log(data);
     axiosApiIntances
       .post("laporanruangan", data)
       .then((res) => {
@@ -531,14 +446,12 @@ class Home extends Component {
           // this.setState({ showModal: false });
           this.props.history.push(`/databooking`);
         }, 10000);
-        console.log("booking selesi");
       })
       .catch((err) => {
         // this.setState({
         //   modalMsg: "Booking Failed !",
         //   showModal: true,
         // });
-        console.log(err);
       });
   };
 
@@ -572,7 +485,6 @@ class Home extends Component {
   };
 
   setUpdate = (data) => {
-    console.log(data);
     this.setState({
       smShow: true,
       isUpdate: true,
@@ -610,7 +522,6 @@ class Home extends Component {
   };
 
   handleDibatalkan = (e) => {
-    console.log(e.row);
 
     this.setState({
       actionPilihan: "Dibatalkan",
@@ -634,14 +545,12 @@ class Home extends Component {
       statusBooking: "Dibatalkan",
       id: e.row.id
     }
-    console.log(laporan);
     this.postBookingData(laporan);
     this.deleteDataBook(e.row.id);
 
   };
 
   handleSelesai = (e) => {
-    console.log(e.row);
 
     this.setState({
       actionPilihan: "Selesai",
@@ -665,15 +574,11 @@ class Home extends Component {
       statusBooking: "Selesai",
       id: e.row.id
     }
-    console.log(laporan);
-    console.log(e.row.id);
     this.postBookingData(laporan);
-    // this.deleteDataBook(e.row.id);
 
   };
 
   changeTextFormDirektorat = (event) => {
-    console.log(event.target.value);
     this.setState({
       form: {
         ...this.state.form,
@@ -737,7 +642,6 @@ class Home extends Component {
   };
 
   render() {
-    console.log(this.props);
     const {
       ruangBuktiSuratDinas,
       ruangDirektorat,
@@ -760,17 +664,11 @@ class Home extends Component {
       photoShow,
       photoSuratDinas,
       foo } = this.state;
-    // console.log("DataMovUpcoming", this.state.dataMovUpcoming);
-    const { dataMovie, pagination } = this.props.movie;
     const { laporanruangann } = this.props.laporanruangan;
     const { data } = this.props.auth;
     const { dataBookingById, dataLaporanById } = this.props.idUser;
     const { bismillah } = this.props.bookingruangan;
-    // console.log(data);
-    // console.log(this.state.form.idUserr);
 
-    // const { dataRuangan } = this.props.ruangan;
-    // console.log(dataRuangan );
     const columns = [
       // { field: 'id', headerName: 'ID', width: 70 },
       { field: 'booking_ruangan_nama', headerName: 'Nama', width: 180 },
@@ -788,10 +686,7 @@ class Home extends Component {
       {
         field: 'booking_ruangan_tanggal', headerName: 'Tanggal Mulai', width: 130, renderCell: (params) => {
           var confdate = new Date(parseInt(params.row.booking_ruangan_tanggal)).toLocaleDateString("en-CA");
-          // console.log(confdate);
 
-          // const date = confdate.toLocaleDateString("en-CA")
-          // console.log(confdate.toLocaleDateString("en-CA"))
           return (
             <div
               className={` mt-0  mx-auto`}
@@ -1032,7 +927,6 @@ class Home extends Component {
                     >
                       {this.state.direktorat.length > 0 ? (
                         this.state.direktorat.map((item, index) => {
-                          // console.log(item);
                           return (
                             <div className="p-3 shadow" key={index}>
                               <Dropdown.Item
@@ -1082,7 +976,6 @@ class Home extends Component {
                     >
                       {foo.length > 0 ? (
                         foo.map((item, index) => {
-                          console.log(item);
                           return (
                             <MenuItem value={item}>{index + 1}. {item}</MenuItem>
                           );
@@ -1260,7 +1153,7 @@ class Home extends Component {
     );
   }
 }
-const mapDispatchToProps = { getAllMovie, getPremiereAll, getlaporanRuanganAll, getLaporanUser, getlaporanRuanganAllTanpaFill, getbookingRuanganAllTanpaFill, getBookingUser, deleteBookingRuangan, updateDataBooking };
+const mapDispatchToProps = { getPremiereAll, getlaporanRuanganAll, getLaporanUser, getlaporanRuanganAllTanpaFill, getbookingRuanganAllTanpaFill, getBookingUser, deleteBookingRuangan, updateDataBooking };
 
 const mapStateToProps = (state) => ({
   movie: state.movie,

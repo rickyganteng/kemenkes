@@ -1,15 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
-import { Nav, Navbar, Button, Image, Modal, Form } from "react-bootstrap";
+import { Nav, Navbar, Button, Image } from "react-bootstrap";
 import logo from "../../assets/img/logokemenkes.png";
-import { Search } from "react-bootstrap-icons";
 import styles from "./NavBar.module.css";
 // import ReactPaginate from "react-paginate";
 import { connect } from "react-redux";
 import { logout } from "../../redux/action/auth";
-import { getAllMovie } from "../../redux/action/movie";
-import dummy from "../../assets/img/icon-defauult.png";
 
 
 class NavBar extends Component {
@@ -30,8 +27,7 @@ class NavBar extends Component {
   }
 
   getData = (search) => {
-    const { page, limit } = this.state;
-    this.props.getAllMovie(page, limit, "movie_name ASC", "%" + search + "%");
+    // this.props.getAllMovie(page, limit, "movie_name ASC", "%" + search + "%");
   };
 
   changeText = (event) => {
@@ -73,8 +69,6 @@ class NavBar extends Component {
   };
 
   render() {
-    const { isShow } = this.state;
-    const { dataMovie } = this.props.movie;
     const { data } = this.props.auth;
     const { isAdminPage } = this.props;
 
@@ -196,7 +190,7 @@ const mapStateToProps = (state) => ({
   movie: state.movie,
 });
 
-const mapDispatchToProps = { logout, getAllMovie };
+const mapDispatchToProps = { logout };
 
 export default connect(
   mapStateToProps,

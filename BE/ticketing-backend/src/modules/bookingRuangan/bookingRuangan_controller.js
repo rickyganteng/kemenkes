@@ -24,7 +24,6 @@ module.exports = {
   getBookingRuanganById: async (req, res) => {
     try {
       let { userId, page, limit, sort, keywords } = req.query
-      console.log('qqqqqqq', userId)
 
       limit = limit || '10'
       page = page || '1'
@@ -56,8 +55,7 @@ module.exports = {
         pageInfo
       )
     } catch (error) {
-      // return helper.response(res, 400, 'Bad Request', error)
-      console.log(error);
+      return helper.response(res, 400, 'Bad Request', error)
     }
   },
   getAllBookingTanpaFill: async (req, res) => {
@@ -72,7 +70,6 @@ module.exports = {
 
       page = parseInt(page)
       limit = parseInt(limit)
-      const offset = page * limit - limit
 
       const totalData = await bookingRuanganModel.getDataCount(keywords)
       console.log('Total Data ' + totalData)
@@ -89,8 +86,7 @@ module.exports = {
       const result = await bookingRuanganModel.getDataAllTanpaFill(keywords, sort)
       return helper.response(res, 200, 'Succes Get Booking Data', result, pageInfo)
     } catch (error) {
-      // return helper.response(res, 400, 'Bad Request', error)
-      console.log(error);
+      return helper.response(res, 400, 'Bad Request', error)
     }
   },
   getAllBookingRuangan: async (req, res) => {

@@ -13,12 +13,6 @@ import hero3 from "../../../assets/img/g3.png";
 import styles from "./DataFilterLaporan.module.css";
 import { connect } from "react-redux";
 import moment from "moment";
-import {
-  getAllMovie,
-  updateMovie,
-  postMovie,
-  deleteMovie,
-} from "../../../redux/action/movie";
 import { getPremiereAll } from "../../../redux/action/ruangan"
 import { getlaporanRuanganAll, getlaporanRuanganAllTanpaFill, getlaporanRuanganTanggal } from "../../../redux/action/laporanRuangan"
 import { getLaporanUser } from "../../../redux/action/user"
@@ -209,7 +203,7 @@ class Home extends Component {
   }
   getData = () => {
 
-    this.props.getAllMovie();
+    // this.props.getAllMovie();
   };
   getData1 = () => {
     const { page, limit, sortBy, search } = this.state;
@@ -225,7 +219,6 @@ class Home extends Component {
   };
   getData3 = () => {
     const id = this.props.auth.data.id;
-    // console.log(id);
     this.props.getLaporanUser(id);
   };
 
@@ -302,7 +295,6 @@ class Home extends Component {
     });
   };
   setUpdate = (data) => {
-    // console.log(data);
     this.setState({
       isUpdate: true,
       id: data.movie_id,
@@ -327,13 +319,11 @@ class Home extends Component {
   };
 
   setSmShow = (event) => {
-    console.log('halooooooo');
     this.setState({
       smShow: true
     });
   };
   modalClose = (event) => {
-    console.log('halo');
     this.setState({
       smShow: false,
       photoShow: false,
@@ -372,10 +362,6 @@ class Home extends Component {
   };
 
   handleImageTable = (moon) => {
-    console.log(moon.row.booking_ruangan_surat_dinas);
-    // console.log(event);
-    // console.log(event.namaruang_r);
-    // this.state.namaruang = event.namaruang_r;
     this.setState({
       photoSuratDinas: moon.row.booking_ruangan_surat_dinas,
       photoShow: true
@@ -383,18 +369,12 @@ class Home extends Component {
   };
 
   handleModalPdf = () => {
-    console.log('dede');
     this.setState({
       modalPdf: true
     })
   }
   handleTanggal = () => {
-    // console.log(moon.row.booking_ruangan_surat_dinas);
-    // console.log(event);
-    // console.log(event.namaruang_r);
-    // this.state.namaruang = event.namaruang_r;
     this.setState({
-      // photoSuratDinas: moon.row.booking_ruangan_surat_dinas,
       modalTanggal: true
     });
   };
@@ -409,19 +389,14 @@ class Home extends Component {
   };
 
   changeTextForm = (event) => {
-    console.log(event);
     if (event.target.name === "FromDate") {
       const d2 = new Date(event.target.value);
       this.state.result2 = d2.getTime();
-      console.log(event.target.value);
-      console.log(this.state.result2);
 
     }
     if (event.target.name === "ToDate") {
       const d1 = new Date(event.target.value);
       this.state.result1 = d1.getTime();
-      console.log(event.target.value);
-      console.log(this.state.result2);
 
     }
     this.setState({
@@ -436,10 +411,6 @@ class Home extends Component {
   };
 
   changeTextFormDirektorat = (event) => {
-    console.log(event.target.value);
-    console.log(event.target.name);
-    console.log(this.state.form.ruangDirektorat);
-
     this.setState({
       form: {
         ...this.state.form,
@@ -449,12 +420,10 @@ class Home extends Component {
       selectedFilter: [],
       foo: this.state.namaUnitKerja[event.target.value]
     });
-    console.log(this.state.foo);
   };
 
 
   handleClearFilter = () => {
-    console.log('dede');
     this.setState({
       selectedFilter: [],
       ToDate: "",
@@ -466,14 +435,6 @@ class Home extends Component {
     })
   }
   render() {
-    console.log(this.props);
-
-    // const value = laporantanggal.filter((elemen) => console.log(elemen));
-
-    // console.log(value);
-
-
-
 
     const {
       siswaNama,
@@ -487,27 +448,19 @@ class Home extends Component {
       ruangDirektorat
     } = this.state.form;
     const { dropDownVal, smShow, photoShow, modalTanggal, photoSuratDinas, FromDate, ToDate, searchtanggal, modalPdf, selectedFilter, direktorat, foo } = this.state;
-    console.log('weeeee', FromDate, ToDate, searchtanggal);
-    console.log('weeeee', selectedFilter);
 
-    console.log("DataMovUpcoming", this.state.result2);
-    const { dataMovie, pagination } = this.props.movie;
+
     const { laporantanggal, laporanruangann } = this.props.laporanruangan;
     const { data } = this.props.auth;
     const { dataLaporanById } = this.props.user;
-    console.log(laporanruangann);
     const arraykosongfilter = [];
 
     const arraydirektorat = laporantanggal.filter(function (heroo) {
       return heroo.booking_ruangan_direktorat == ruangDirektorat
     })
-    console.log(arraydirektorat);
 
     for (let index = 0; index < selectedFilter.length; index++) {
       const marvelHeroes = laporantanggal.filter(function (hero) {
-        // console.log(selectedFilter[index]);
-        // for (let indexx = 0; indexx < laporantanggal.length; indexx++) {
-        // }
         return hero.booking_ruangan_unitkerja == selectedFilter[index]
 
         // if (hero.booking_ruangan_unitkerja == selectedFilter[index]) {
@@ -515,29 +468,14 @@ class Home extends Component {
 
       }
       )
-      // arraykosongfilter.push(marvelHeroes)
       arraykosongfilter.push(marvelHeroes)
-      // arraykosong.push(Tokenss);
 
     };
-    // const { dataRuangan } = this.props.ruangan;
-    // console.log(marvelHeroes);
-
-    // console.log(arraykosongfilter);
     let element = []
     for (let index = 0; index < arraykosongfilter.length; index++) {
       element = element.concat(arraykosongfilter[index]);
 
     }
-    console.log('laporantanggal', laporantanggal);
-
-    console.log('selectFilter', selectedFilter);
-    console.log('element', element);
-
-    console.log('arraydirektorat', arraydirektorat);
-    console.log('ruangdirektorat', ruangDirektorat);
-    // console.log(arraykosongfilter);
-    // console.log(arraykosongfilter.length);
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
     const MenuProps = {
@@ -577,10 +515,7 @@ class Home extends Component {
       {
         field: 'booking_ruangan_tanggal', headerName: 'Tanggal Mulai', width: 130, renderCell: (params) => {
           var confdate = new Date(parseInt(params.row.booking_ruangan_tanggal)).toLocaleDateString("en-CA");
-          console.log(confdate);
 
-          // const date = confdate.toLocaleDateString("en-CA")
-          // console.log(confdate.toLocaleDateString("en-CA"))
           return (
             <div
               className={` mt-0  mx-auto`}
@@ -633,21 +568,10 @@ class Home extends Component {
         // const splice = columns[index].headerName
         splicetabel.push(columns[index])
       }
-      // const element = array[index];
-      // console.log(columns[index].headerName);
+
     }
-    console.log(splicetabel);
-
     const arraykosong = [];
-    console.log('foooo', foo);
-    console.log('foooo', selectedFilter.length);
-
-    console.log('foooo', foo.length > 0 && selectedFilter.length === foo.length);
-
     for (let index = 0; index < laporantanggal.length; index++) {
-      // const element = laporantanggal[index].booking_ruangan_unitkerja;
-      // console.log(laporantanggal.length);
-      // console.log(laporantanggal[index].booking_ruangan_unitkerja);
       const dataUnit = laporantanggal[index].booking_ruangan_unitkerja;
       arraykosong.push(dataUnit);
 
@@ -799,7 +723,6 @@ class Home extends Component {
         arraySurveilans.push(index)
       }
     }
-    console.log(arraykosong);
 
 
     // for (let index = 0; index < arraykosong.length; index++) {
@@ -898,7 +821,6 @@ class Home extends Component {
                 MenuProps={MenuProps}
               >
                 {foo.map((name) => {
-                  // console.log(name);
                   return (
                     <MenuItem key={name} value={name}>
                       <Checkbox checked={selectedFilter.indexOf(name) > -1} />
@@ -1364,7 +1286,7 @@ class Home extends Component {
     );
   }
 }
-const mapDispatchToProps = { getAllMovie, getPremiereAll, getlaporanRuanganAll, getLaporanUser, getlaporanRuanganAllTanpaFill, getlaporanRuanganTanggal };
+const mapDispatchToProps = { getPremiereAll, getlaporanRuanganAll, getLaporanUser, getlaporanRuanganAllTanpaFill, getlaporanRuanganTanggal };
 
 const mapStateToProps = (state) => ({
   movie: state.movie,

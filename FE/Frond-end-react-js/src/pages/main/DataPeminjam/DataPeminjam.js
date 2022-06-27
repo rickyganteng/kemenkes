@@ -14,12 +14,6 @@ import hero3 from "../../../assets/img/g3.png";
 import styles from "./DataPeminjam.module.css";
 import { connect } from "react-redux";
 import moment from "moment";
-import {
-  getAllMovie,
-  updateMovie,
-  postMovie,
-  deleteMovie,
-} from "../../../redux/action/movie";
 import { getUserAllTanpaFill, postUser, updateDataUser, deleteUser } from "../../../redux/action/user"
 import EditIcon from '@mui/icons-material/Edit';
 import { getPremiereAll } from "../../../redux/action/ruangan"
@@ -233,7 +227,6 @@ class Home extends Component {
     });
   };
   setUpdate = (data) => {
-    console.log(data);
     this.setState({
       smShow: true,
       isUpdate: true,
@@ -260,13 +253,11 @@ class Home extends Component {
   };
 
   setSmShow = (event) => {
-    console.log('halooooooo');
     this.setState({
       smShow: true
     });
   };
   modalClose = (event) => {
-    console.log('halo');
     this.setState({
       isUpdate: false,
       smShow: false,
@@ -329,9 +320,7 @@ class Home extends Component {
   };
 
   postDataUser = () => {
-    console.log("pos");
     const { form } = this.state;
-    console.log(form);
     const formData = new FormData();
     for (const key in form) {
       formData.append(key, form[key]);
@@ -345,7 +334,6 @@ class Home extends Component {
       form.userRole == "" ||
       form.userUnitKerja == ""
     ) {
-      console.log("rabiso weee");
 
       this.setState({
         // modalMsg: err.response.data.msg,
@@ -373,7 +361,6 @@ class Home extends Component {
 
         })
         .catch((err) => {
-          console.log(err.response.data.msg);
           this.setState({
             // modalMsg: err.response.data.msg,
             showw: true,
@@ -390,7 +377,6 @@ class Home extends Component {
 
   };
   handleSelectUserRole = (event) => {
-    console.log(event);
     this.setState({
       dropDownUserRole: event,
       form: {
@@ -446,7 +432,6 @@ class Home extends Component {
     }
   };
   modalPhotoClose = (event) => {
-    console.log('halo');
     this.setState({
       photoShow: false,
       photoShowPdf: false,
@@ -456,7 +441,6 @@ class Home extends Component {
     });
   };
   handleSelectUnitKerja = (event) => {
-    console.log(event);
     this.setState({
       dropDownVal2: event,
       form: {
@@ -468,7 +452,6 @@ class Home extends Component {
   };
 
   // setUpdate = (data) => {
-  //   console.log(data);
 
   //   this.setState({
   //     smShow: true,
@@ -506,7 +489,6 @@ class Home extends Component {
     });
   };
   render() {
-    console.log(this.props);
     const {
       siswaNama,
       siswaNISN,
@@ -527,11 +509,8 @@ class Home extends Component {
       userVerif
     } = this.state.form;
     const { dropDownVal, smShow, dropDownUserRole, listUserRole, dropDownVal2, isUpdate, showw, msgNotif } = this.state;
-    // console.log("DataMovUpcoming", this.state.dataMovUpcoming);
-    const { dataMovie, pagination } = this.props.movie;
     const { dataUser } = this.props.user
     // const { dataRuangan } = this.props.ruangan;
-    console.log(dataUser);
 
     const columns = [
       // { field: 'id', headerName: 'NO', width: 70 },
@@ -683,7 +662,6 @@ class Home extends Component {
                     >
                       {this.state.unitkerja.length > 0 ? (
                         this.state.unitkerja.map((item, index) => {
-                          // console.log(item);
                           return (
                             <div className="p-3 shadow" key={index}>
                               <Dropdown.Item
@@ -729,7 +707,6 @@ class Home extends Component {
                     >
                       {this.state.listUserRole.length > 0 ? (
                         this.state.listUserRole.map((item, index) => {
-                          // console.log(item);
                           return (
                             <div className="p-3 shadow" key={index}>
                               <Dropdown.Item
@@ -791,7 +768,7 @@ class Home extends Component {
     );
   }
 }
-const mapDispatchToProps = { getAllMovie, getPremiereAll, getUserAllTanpaFill, postUser, updateDataUser, deleteUser };
+const mapDispatchToProps = { getPremiereAll, getUserAllTanpaFill, postUser, updateDataUser, deleteUser };
 
 const mapStateToProps = (state) => ({
   movie: state.movie,

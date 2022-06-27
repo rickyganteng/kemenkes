@@ -14,12 +14,6 @@ import hero3 from "../../../assets/img/g3.png";
 import styles from "./DataLaporanUser.module.css";
 import { connect } from "react-redux";
 import moment from "moment";
-import {
-  getAllMovie,
-  updateMovie,
-  postMovie,
-  deleteMovie,
-} from "../../../redux/action/movie";
 import { getPremiereAll } from "../../../redux/action/ruangan"
 import { getlaporanRuanganAll, getlaporanRuanganAllTanpaFill, getlaporanRuanganTanggal } from "../../../redux/action/laporanRuangan"
 import { getLaporanUser } from "../../../redux/action/user"
@@ -106,7 +100,7 @@ class Home extends Component {
   }
   getData = () => {
 
-    this.props.getAllMovie();
+    // this.props.getAllMovie();
   };
   getData1 = () => {
     const { page, limit, sortBy, search } = this.state;
@@ -122,7 +116,6 @@ class Home extends Component {
   };
   getData3 = () => {
     const id = this.props.auth.data.id;
-    // console.log(id);
     this.props.getLaporanUser(id);
   };
 
@@ -199,7 +192,6 @@ class Home extends Component {
     });
   };
   setUpdate = (data) => {
-    // console.log(data);
     this.setState({
       isUpdate: true,
       id: data.movie_id,
@@ -224,13 +216,11 @@ class Home extends Component {
   };
 
   setSmShow = (event) => {
-    console.log('halooooooo');
     this.setState({
       smShow: true
     });
   };
   modalClose = (event) => {
-    console.log('halo');
     this.setState({
       smShow: false,
       photoShow: false,
@@ -268,28 +258,19 @@ class Home extends Component {
   };
 
   handleImageTable = (moon) => {
-    console.log(moon.row.booking_ruangan_surat_dinas);
-    // console.log(event);
-    // console.log(event.namaruang_r);
-    // this.state.namaruang = event.namaruang_r;
     this.setState({
       photoSuratDinas: moon.row.booking_ruangan_surat_dinas,
       photoShow: true
     });
   };
   handleTanggal = () => {
-    // console.log(moon.row.booking_ruangan_surat_dinas);
-    // console.log(event);
-    // console.log(event.namaruang_r);
-    // this.state.namaruang = event.namaruang_r;
+
     this.setState({
-      // photoSuratDinas: moon.row.booking_ruangan_surat_dinas,
       modalTanggal: true
     });
   };
 
   changeTextForm = (event) => {
-    console.log(event);
     this.setState({
       form: {
         ...this.state.form,
@@ -298,7 +279,6 @@ class Home extends Component {
     });
   };
   render() {
-    console.log(this.props);
     const {
       siswaNama,
       siswaNISN,
@@ -310,16 +290,10 @@ class Home extends Component {
       siswaAlamat,
       FromDate, ToDate, searchtanggal
     } = this.state.form;
-    console.log('weeeee', FromDate, ToDate, searchtanggal);
     const { dropDownVal, smShow, photoShow, modalTanggal, photoSuratDinas } = this.state;
-    // console.log("DataMovUpcoming", this.state.dataMovUpcoming);
-    const { dataMovie, pagination } = this.props.movie;
     const { laporanruangann } = this.props.laporanruangan;
     const { data } = this.props.auth;
     const { dataLaporanById } = this.props.user;
-    console.log(data);
-    // const { dataRuangan } = this.props.ruangan;
-    // console.log(dataRuangan );
     const columns = [
       // { field: 'id', headerName: 'ID', width: 70 },
       { field: 'booking_ruangan_nama', headerName: 'Nama', width: 130 },
@@ -328,10 +302,6 @@ class Home extends Component {
       {
         field: 'booking_ruangan_tanggal', headerName: 'Tanggal Mulai', width: 130, renderCell: (params) => {
           var confdate = new Date(parseInt(params.row.booking_ruangan_tanggal)).toLocaleDateString("en-CA");
-          console.log(confdate);
-
-          // const date = confdate.toLocaleDateString("en-CA")
-          // console.log(confdate.toLocaleDateString("en-CA"))
           return (
             <div
               className={` mt-0  mx-auto`}
@@ -536,7 +506,7 @@ class Home extends Component {
     );
   }
 }
-const mapDispatchToProps = { getAllMovie, getPremiereAll, getlaporanRuanganAll, getLaporanUser, getlaporanRuanganAllTanpaFill, getlaporanRuanganTanggal };
+const mapDispatchToProps = { getPremiereAll, getlaporanRuanganAll, getLaporanUser, getlaporanRuanganAllTanpaFill, getlaporanRuanganTanggal };
 
 const mapStateToProps = (state) => ({
   movie: state.movie,

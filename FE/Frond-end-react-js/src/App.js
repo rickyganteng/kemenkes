@@ -14,14 +14,6 @@ import BasicReact from "./pages/learning/BasicReact/BasicReact";
 import BasicHome from "./pages/learning/Home/Home";
 import BasicMovieDetail from "./pages/learning/MovieDetail/MovieDetail";
 import BasicRedux from "./pages/learning/BasicRedux/BasicRedux";
-import Home from "./pages/main/Home/Home";
-import MovieDetail from "./pages/main/MovieDetail/MovieDetail";
-import Payment from "./pages/main/Payment/Payment";
-import AdminManageMovie from "./pages/main/AdminManageMovie/AdminManageMovie";
-import AdminManageSchedule from "./pages/main/AdminManageSchedule/AdminManageSchedule";
-import AdminDashboard from "./pages/main/AdminDashboard/AdminDashboard";
-import Order from "./pages/main/Order/Order";
-import Profile from "./pages/main/Profile/Profile";
 
 import HomeBook from "./pages/main/HomeBook/Homebook";
 import DataPeminjam from "./pages/main/DataPeminjam/DataPeminjam";
@@ -104,29 +96,7 @@ class App extends Component {
                 component={HomeBook}
               />
               {/* <PublicRoute path="/" exact component={Home} /> */}
-              <PublicRoute
-                path="/main/movie-detail/:id"
-                exact
-                component={MovieDetail}
-              />
-              <PrivateRoute path="/main/payment" exact component={Payment} />
-              <PrivateRoute
-                path="/main/admin/manage-movie"
-                exact
-                component={AdminManageMovie}
-              />
-              <PrivateRoute
-                path="/main/admin/manage-schedule"
-                exact
-                component={AdminManageSchedule}
-              />
-              <PrivateRoute
-                path="/main/admin/dashboard"
-                exact
-                component={AdminDashboard}
-              />
-              <PrivateRoute path="/main/order" exact component={Order} />
-              <PrivateRoute path="/main/profile" exact component={Profile} />
+
             </Switch>
           </Router>
         </PersistGate>
